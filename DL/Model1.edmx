@@ -1,0 +1,186 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="LBastidaBusquedaLibrosModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Libro">
+          <Key>
+            <PropertyRef Name="IdLibro" />
+          </Key>
+          <Property Name="IdLibro" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Titulo" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="AnioPublicacion" Type="int" Nullable="false" />
+          <Property Name="ISBN" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Autor" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Editorial" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Function Name="AddLibro" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Titulo" Type="varchar" Mode="In" />
+          <Parameter Name="AnioPublicacion" Type="int" Mode="In" />
+          <Parameter Name="ISBN" Type="varchar" Mode="In" />
+          <Parameter Name="Autor" Type="varchar" Mode="In" />
+          <Parameter Name="Editorial" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="DeleteLibroAutor" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Autor" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="DeleteLibroEditorial" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Editorial" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="Get" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetAll" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Titulo" Type="varchar" Mode="In" />
+          <Parameter Name="Autor" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="GetById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdLibro" Type="int" Mode="In" />
+        </Function>
+        <EntityContainer Name="LBastidaBusquedaLibrosModelStoreContainer">
+          <EntitySet Name="Libro" EntityType="Self.Libro" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="LBastidaBusquedaLibrosModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Libro">
+          <Key>
+            <PropertyRef Name="IdLibro" />
+          </Key>
+          <Property Name="IdLibro" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Titulo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="AnioPublicacion" Type="Int32" Nullable="false" />
+          <Property Name="ISBN" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Autor" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Editorial" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="LBastidaBusquedaLibrosEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Libroes" EntityType="Self.Libro" />
+          <FunctionImport Name="AddLibro">
+            <Parameter Name="Titulo" Mode="In" Type="String" />
+            <Parameter Name="AnioPublicacion" Mode="In" Type="Int32" />
+            <Parameter Name="ISBN" Mode="In" Type="String" />
+            <Parameter Name="Autor" Mode="In" Type="String" />
+            <Parameter Name="Editorial" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="DeleteLibroAutor">
+          <Parameter Name="Autor" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="DeleteLibroEditorial">
+          <Parameter Name="Editorial" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GetById" ReturnType="Collection(LBastidaBusquedaLibrosModel.GetById_Result)">
+          <Parameter Name="IdLibro" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Get" ReturnType="Collection(LBastidaBusquedaLibrosModel.Get_Result)" />
+          <FunctionImport Name="GetAll" ReturnType="Collection(LBastidaBusquedaLibrosModel.GetAll_Result)">
+            <Parameter Name="Titulo" Mode="In" Type="String" />
+            <Parameter Name="Autor" Mode="In" Type="String" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="GetById_Result">
+          <Property Type="Int32" Name="IdLibro" Nullable="false" />
+          <Property Type="String" Name="Titulo" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Autor" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Editorial" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="ISBN" Nullable="false" MaxLength="30" />
+          <Property Type="Int32" Name="AnioPublicacion" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="Get_Result">
+          <Property Type="Int32" Name="IdLibro" Nullable="false" />
+          <Property Type="String" Name="Titulo" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Autor" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Editorial" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="ISBN" Nullable="false" MaxLength="30" />
+          <Property Type="Int32" Name="AnioPublicacion" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="GetAll_Result">
+          <Property Type="Int32" Name="IdLibro" Nullable="false" />
+          <Property Type="String" Name="Titulo" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Autor" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Editorial" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="ISBN" Nullable="false" MaxLength="30" />
+          <Property Type="Int32" Name="AnioPublicacion" Nullable="false" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="LBastidaBusquedaLibrosModelStoreContainer" CdmEntityContainer="LBastidaBusquedaLibrosEntities1">
+          <EntitySetMapping Name="Libroes">
+            <EntityTypeMapping TypeName="LBastidaBusquedaLibrosModel.Libro">
+              <MappingFragment StoreEntitySet="Libro">
+                <ScalarProperty Name="IdLibro" ColumnName="IdLibro" />
+                <ScalarProperty Name="Titulo" ColumnName="Titulo" />
+                <ScalarProperty Name="AnioPublicacion" ColumnName="AnioPublicacion" />
+                <ScalarProperty Name="ISBN" ColumnName="ISBN" />
+                <ScalarProperty Name="Autor" ColumnName="Autor" />
+                <ScalarProperty Name="Editorial" ColumnName="Editorial" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="AddLibro" FunctionName="LBastidaBusquedaLibrosModel.Store.AddLibro" />
+          <FunctionImportMapping FunctionImportName="DeleteLibroAutor" FunctionName="LBastidaBusquedaLibrosModel.Store.DeleteLibroAutor" />
+          <FunctionImportMapping FunctionImportName="DeleteLibroEditorial" FunctionName="LBastidaBusquedaLibrosModel.Store.DeleteLibroEditorial" />
+          <FunctionImportMapping FunctionImportName="GetById" FunctionName="LBastidaBusquedaLibrosModel.Store.GetById">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="LBastidaBusquedaLibrosModel.GetById_Result">
+                <ScalarProperty Name="IdLibro" ColumnName="IdLibro" />
+                <ScalarProperty Name="Titulo" ColumnName="Titulo" />
+                <ScalarProperty Name="Autor" ColumnName="Autor" />
+                <ScalarProperty Name="Editorial" ColumnName="Editorial" />
+                <ScalarProperty Name="ISBN" ColumnName="ISBN" />
+                <ScalarProperty Name="AnioPublicacion" ColumnName="AnioPublicacion" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Get" FunctionName="LBastidaBusquedaLibrosModel.Store.Get">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="LBastidaBusquedaLibrosModel.Get_Result">
+                <ScalarProperty Name="IdLibro" ColumnName="IdLibro" />
+                <ScalarProperty Name="Titulo" ColumnName="Titulo" />
+                <ScalarProperty Name="Autor" ColumnName="Autor" />
+                <ScalarProperty Name="Editorial" ColumnName="Editorial" />
+                <ScalarProperty Name="ISBN" ColumnName="ISBN" />
+                <ScalarProperty Name="AnioPublicacion" ColumnName="AnioPublicacion" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetAll" FunctionName="LBastidaBusquedaLibrosModel.Store.GetAll">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="LBastidaBusquedaLibrosModel.GetAll_Result">
+                <ScalarProperty Name="IdLibro" ColumnName="IdLibro" />
+                <ScalarProperty Name="Titulo" ColumnName="Titulo" />
+                <ScalarProperty Name="Autor" ColumnName="Autor" />
+                <ScalarProperty Name="Editorial" ColumnName="Editorial" />
+                <ScalarProperty Name="ISBN" ColumnName="ISBN" />
+                <ScalarProperty Name="AnioPublicacion" ColumnName="AnioPublicacion" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

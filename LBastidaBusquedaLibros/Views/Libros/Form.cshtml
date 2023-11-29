@@ -1,0 +1,54 @@
+﻿@model BL.Libros
+@{
+    ViewBag.Title = "Form";
+}
+
+<div class="form-control">
+    @using (Html.BeginForm("Form", "Libros", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <form>
+            @Html.HiddenFor(model => Model.IdLibro);
+            <fieldset>
+
+                <div class="container row" style="margin-top:5rem; margin-left:4rem">
+                    <div class="col-md-3">
+                        @Html.LabelFor(model => model.Titulo)
+                        <br />
+                        @Html.TextBoxFor(model => Model.Titulo)
+                    </div>
+
+                    <div class="col-md-3">
+                        @Html.LabelFor(model => model.Autor)
+                        <br />
+                        @Html.TextBoxFor(model => Model.Autor)
+                    </div>
+
+                    <div class="col-md-3">
+                        @Html.LabelFor(model => model.ISBN)
+                        <br />
+                        @Html.TextBoxFor(model => Model.ISBN)
+                    </div>
+                </div>
+
+                <div class="container row" style="margin-left:18rem; margin-top:3rem ">
+                    <div class="col-md-3">
+                        @Html.LabelFor(model => model.Editorial)
+                        <br />
+                        @Html.TextBoxFor(model => Model.Editorial)
+                    </div>
+
+                    <div class="col-md-3" style="margin-left:4rem">
+                        @Html.LabelFor(model => model.AnioPublicacion)
+                        <br />
+                        @Html.TextBoxFor(model => Model.AnioPublicacion)
+                    </div>
+                </div>
+            </fieldset>
+
+            <button class="btn btn-success" type="submit">Guardar</button>
+
+        </form>
+    }
+
+</div>
+

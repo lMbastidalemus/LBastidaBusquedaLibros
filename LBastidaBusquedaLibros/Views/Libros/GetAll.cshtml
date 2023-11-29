@@ -1,0 +1,65 @@
+﻿@model BL.Libros
+@{
+    ViewBag.Title = "GetAll";
+}
+
+<div>
+    <h1 style="font-weight:700; text-align:center; margin-bottom:3rem">Listado de Libros</h1>
+</div>
+@using (Html.BeginForm("GetAll", "Libros", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div style="margin-top:2rem; display:flex; justify-content:center">
+        <div class="col-md-3">
+            @Html.TextBoxFor(model => model.Autor, new { @placeholder = "Autor" })
+        </div>
+        <div class="col-md-3">
+            @Html.TextBoxFor(model => model.Titulo, new {  @placeholder = "Titulo" })
+        </div>
+        <button class="btn btn-dark" type="submit" style="margin-bottom:2rem">Buscar</button>
+    </div>
+}
+
+<div style="margin-top:5rem ;display:flex; justify-content:end">
+    <a class="btn btn-success" href="@Url.Action("Form", "Libros")">Agregar Libro</a>
+</div>
+
+<div class="table-responsive">
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Información</th>
+                <th>Eliminar por Autor</th>
+                <th>Titulo</th>
+                <th>Autor</th>
+                <th>Editorial</th>
+                <th>Anio de Publicacion</th>
+                <th>ISBN</th>
+                <th>Eliminar por Editorial</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (BL.Libros libros in Model.Libross)
+            {
+                <tr>
+                    <td>
+                        <a class="btn btn-warning" href="@Url.Action("Form", "Libros", new { IdLibro = libros.IdLibro })">Ver información</a>
+                    </td>
+                    <td>
+                        <a class="btn btn-danger" href="@Url.Action("DeletexAutor", "Libros", new { Autor = libros.Autor })" onclick="return confirm('Seguro de eliminar todos los libros de esta autor');">Eliminar</a>
+                    </td>
+                    <td>@libros.Titulo</td>
+                    <td>@libros.Autor</td>
+                    <td>@libros.Editorial</td>
+                    <td>@libros.AnioPublicacion</td>
+                    <td>@libros.ISBN</td>
+                    <td>
+                        <a class="btn btn-danger" href="@Url.Action("DeletexEditorial", "Libros", new { Editorial = libros.Editorial })" onclick="return confirm('Seguro de eliminar todos los libros de esta editorial');">Eliminar</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</div>
+
